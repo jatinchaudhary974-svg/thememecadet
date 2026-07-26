@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark military theme — used as the only theme */
+    --background: 120 12% 4%;          /* near-black w/ faint green */
+    --foreground: 40 22% 90%;          /* off white / bone */
+
+    --card: 120 14% 6%;
+    --card-foreground: 40 22% 90%;
+
+    --popover: 120 14% 6%;
+    --popover-foreground: 40 22% 90%;
+
+    --primary: 42 44% 58%;             /* gold */
+    --primary-foreground: 120 20% 6%;
+
+    --secondary: 130 18% 15%;          /* deep olive */
+    --secondary-foreground: 40 22% 90%;
+
+    --muted: 120 8% 12%;
+    --muted-foreground: 90 6% 62%;
+
+    --accent: 130 18% 15%;
+    --accent-foreground: 40 22% 90%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 40 22% 92%;
+
+    --border: 120 10% 14%;
+    --input: 120 10% 14%;
+    --ring: 42 44% 58%;
+
+    --radius: 0.25rem;
+  }
+
+  * { border-color: hsl(var(--border)); }
+
+  html, body {
+    background-color: #050706;
+    color: #EDEAE0;
+  }
+
+  body {
+    font-feature-settings: "ss01", "cv02", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #C9A961;
+    color: #0B120D;
+  }
+}
+
+@layer utilities {
+  /* Subtle film grain overlay */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='1'/></svg>");
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(237,234,224,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(237,234,224,0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .radial-fade {
+    background: radial-gradient(60% 50% at 50% 40%, rgba(31,46,34,0.45) 0%, rgba(5,7,6,0) 70%);
+  }
+
+  .text-balance { text-wrap: balance; }
+
+  .hairline { height: 1px; background: linear-gradient(to right, transparent, rgba(237,234,224,0.25), transparent); }
+
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(237,234,224,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+  }
+  .btn-shine:hover::after { left: 125%; }
+}
