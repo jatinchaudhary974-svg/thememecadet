@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
+import { Inter, Playfair_Display, JetBrains_Mono, Homemade_Apple } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
@@ -20,6 +20,13 @@ const mono = JetBrains_Mono({
   display: 'swap',
   variable: '--font-mono',
   weight: ['300', '400', '500', '600'],
+})
+
+const signature = Homemade_Apple({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-signature',
+  weight: ['400'],
 })
 
 export const metadata = {
@@ -122,7 +129,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${mono.variable} dark`}
+      className={`${inter.variable} ${playfair.variable} ${mono.variable} ${signature.variable} dark`}
       suppressHydrationWarning
     >
       <head>

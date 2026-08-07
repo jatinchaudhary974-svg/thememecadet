@@ -895,6 +895,49 @@ function Footer() {
             <div className="font-display italic font-medium text-cadet-bone/80 leading-tight tracking-tight text-[clamp(1rem,3vw,1.5rem)]">
               Vision to Execution.
             </div>
+
+            {/* Founder's signature — subtle, pen-written */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: 0.2, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8 sm:mt-10 flex flex-col items-center"
+              aria-label="Founder's signature"
+            >
+              <div className="relative">
+                <span
+                  className="font-signature text-cadet-bone/70 select-none block leading-none"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+                    transform: 'rotate(-3deg)',
+                    textShadow: '0 1px 0 rgba(0,0,0,0.35)',
+                  }}
+                >
+                  TheMemeCadet
+                </span>
+                {/* Hand-drawn signature line */}
+                <svg
+                  className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 opacity-60"
+                  width="180"
+                  height="8"
+                  viewBox="0 0 180 8"
+                  fill="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M2 4.5 C 25 2, 60 6, 90 3.5 S 155 6, 178 2.5"
+                    stroke="rgba(237,234,224,0.55)"
+                    strokeWidth="0.9"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+              <span className="mt-5 sm:mt-6 font-mono text-[9px] sm:text-[10px] tracking-[0.38em] text-cadet-khaki uppercase">
+                Signed · Founder
+              </span>
+            </motion.div>
           </div>
         </motion.div>
 

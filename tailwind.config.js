@@ -67,7 +67,8 @@ module.exports = {
         fontFamily: {
           sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui'],
           display: ['var(--font-display)', 'ui-serif', 'Georgia'],
-          mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular']
+          mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular'],
+          signature: ['var(--font-signature)', 'cursive'],
         },
         borderRadius: {
           lg: 'var(--radius)',
