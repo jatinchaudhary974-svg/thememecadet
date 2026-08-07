@@ -45,7 +45,7 @@ export default function BrandLoader() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <CadetLogo size={128} priority />
+              <CadetLogo size={128} variant="boxed" priority />
             </motion.div>
 
             <motion.div

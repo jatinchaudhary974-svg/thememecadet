@@ -118,7 +118,12 @@ export default function IndependenceOverlay() {
               transition={{ delay: 0.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="mx-auto mb-6 sm:mb-8"
             >
-              <CadetLogo size={96} priority className="sm:!w-[120px] sm:!h-[120px]" />
+              <CadetLogo
+                size={104}
+                variant="boxed"
+                priority
+                className="sm:!w-[128px] sm:!h-[128px]"
+              />
             </motion.div>
 
             <motion.h2

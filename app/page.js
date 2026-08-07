@@ -65,7 +65,7 @@ function Nav() {
     >
       <div className="container flex items-center justify-between h-14 sm:h-16 md:h-20">
         <a href="#home" className="flex items-center gap-2.5 sm:gap-3 group">
-          <CadetLogo size={38} priority />
+          <CadetLogo size={40} variant="boxed" priority />
           <div className="leading-none">
             <div className="text-[12px] sm:text-[13px] md:text-sm font-semibold tracking-[0.22em] text-cadet-bone">
               THEMEMECADET
@@ -303,7 +303,12 @@ function Hero() {
               transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
               className="relative"
             >
-              <CadetLogo size={220} priority className="sm:!w-[280px] sm:!h-[280px] md:!w-[340px] md:!h-[340px]" />
+              <CadetLogo
+                size={240}
+                variant="transparent"
+                priority
+                className="sm:!w-[320px] sm:!h-[320px] md:!w-[380px] md:!h-[380px] drop-shadow-[0_20px_60px_rgba(201,169,97,0.15)]"
+              />
             </motion.div>
           </motion.div>
 
@@ -801,7 +806,7 @@ function Footer() {
         <div className="grid md:grid-cols-12 gap-10 md:gap-8">
           <div className="md:col-span-5">
             <div className="flex items-center gap-3">
-              <CadetLogo size={48} />
+              <CadetLogo size={52} variant="boxed" />
               <div>
                 <div className="text-base sm:text-lg font-semibold tracking-[0.22em]">THEMEMECADET</div>
                 <div className="font-mono text-[10px] tracking-[0.35em] text-cadet-khaki mt-1">

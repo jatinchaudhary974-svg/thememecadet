@@ -42,10 +42,10 @@ export const metadata = {
   ],
   icons: {
     icon: [
-      { url: '/logo.png', type: 'image/png' },
+      { url: '/logo-boxed.png', type: 'image/png' },
     ],
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    shortcut: '/logo-boxed.png',
+    apple: '/logo-boxed.png',
   },
   manifest: '/manifest.webmanifest',
   openGraph: {
@@ -57,7 +57,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/logo.png',
+        url: '/logo-boxed.png',
         width: 1024,
         height: 1024,
         alt: 'THEMEMECADET — official logo',
@@ -68,7 +68,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'THEMEMECADET — Vision to Execution',
     description: 'Official headquarters of THEMEMECADET. VEER BHOGYA VASUNDHARA.',
-    images: ['/logo.png'],
+    images: ['/logo-boxed.png'],
     creator: '@thememecadet',
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -92,7 +92,7 @@ const jsonLd = {
       name: 'THEMEMECADET',
       alternateName: ['MEMECADET', 'The Meme Cadet'],
       url: 'https://thememecadet.com',
-      logo: 'https://thememecadet.com/logo.png',
+      logo: 'https://thememecadet.com/logo-boxed.png',
       foundingDate: '2025-10',
       slogan: 'Vision to Execution',
       description:
@@ -126,7 +126,8 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <head>
-        <link rel="preload" as="image" href="/logo.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/logo-boxed.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/logo-transparent.png" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

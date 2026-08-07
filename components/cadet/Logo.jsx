@@ -4,10 +4,26 @@ import { motion } from 'framer-motion'
 
 /**
  * Official THEMEMECADET logo.
- * The source image is used exactly as provided — no cropping, no filters.
- * We only scale it responsively.
+ *
+ * Two variants of the SAME logo image (untouched, exactly as provided):
+ *   - "transparent" : PNG with no background — used on the dark hero where the
+ *                     mark should float seamlessly.
+ *   - "boxed"       : PNG with the dark-green brand background baked in — used
+ *                     in the navbar, overlay banners, footer and loader; we
+ *                     apply a soft rounded corner + subtle gold hairline so it
+ *                     sits like a proper brand chip.
  */
-export function CadetLogo({ size = 96, priority = false, className = '', animate = false }) {
+export function CadetLogo({
+  size = 96,
+  variant = 'boxed',       // 'boxed' | 'transparent'
+  priority = false,
+  animate = false,
+  rounded = true,          // only applies to boxed variant
+  className = '',
+}) {
+  const src = variant === 'transparent' ? '/logo-transparent.png' : '/logo-boxed.png'
+  const alt = 'THEMEMECADET — the meme Cadet · official logo'
+
   const Wrapper = animate ? motion.div : 'div'
   const motionProps = animate
     ? {
@@ -17,19 +33,24 @@ export function CadetLogo({ size = 96, priority = false, className = '', animate
       }
     : {}
 
+  const isBoxed = variant === 'boxed'
+  const chipClasses = isBoxed && rounded
+    ? 'rounded-xl overflow-hidden ring-1 ring-cadet-gold/25 shadow-[0_6px_24px_-8px_rgba(0,0,0,0.6)]'
+    : ''
+
   return (
     <Wrapper
       {...motionProps}
-      className={`relative inline-block ${className}`}
+      className={`relative inline-block ${chipClasses} ${className}`}
       style={{ width: size, height: size }}
     >
       <Image
-        src="/logo.png"
-        alt="THEMEMECADET — official logo"
+        src={src}
+        alt={alt}
         fill
         priority={priority}
         sizes={`${size}px`}
-        className="object-contain select-none pointer-events-none"
+        className={`${isBoxed ? 'object-cover' : 'object-contain'} select-none pointer-events-none`}
         draggable={false}
       />
     </Wrapper>
