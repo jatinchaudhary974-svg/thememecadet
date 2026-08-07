@@ -23,33 +23,115 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata = {
-  title: 'THEMEMECADET — Vision to Execution',
-  description:
-    'THEMEMECADET — Official brand headquarters. VEER BHOGYA VASUNDHARA. A premium creator brand built on discipline, creativity and meaningful short-form content. Established October 2025.',
-  keywords: [
-    'THEMEMECADET', 'MEMECADET', 'Vision to Execution',
-    'VEER BHOGYA VASUNDHARA', 'creator brand', 'short-form content',
-    'YouTube creator', 'premium creator brand', 'discipline'
-  ],
   metadataBase: new URL('https://thememecadet.com'),
+  title: {
+    default: 'THEMEMECADET — Vision to Execution',
+    template: '%s — THEMEMECADET',
+  },
+  description:
+    'THEMEMECADET — official headquarters. A premium creator brand built on discipline, creativity and meaningful short-form content. VEER BHOGYA VASUNDHARA. Established October 2025.',
+  applicationName: 'THEMEMECADET',
+  authors: [{ name: 'THEMEMECADET' }],
+  creator: 'THEMEMECADET',
+  publisher: 'THEMEMECADET',
+  keywords: [
+    'THEMEMECADET', 'MEMECADET', 'the meme cadet',
+    'Vision to Execution', 'VEER BHOGYA VASUNDHARA',
+    'creator brand', 'short-form content', 'YouTube Shorts',
+    'YouTube creator', 'premium creator brand', 'meme cadet'
+  ],
+  icons: {
+    icon: [
+      { url: '/logo.png', type: 'image/png' },
+    ],
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
+  manifest: '/manifest.webmanifest',
   openGraph: {
     title: 'THEMEMECADET — Vision to Execution',
-    description: 'Official headquarters of THEMEMECADET. VEER BHOGYA VASUNDHARA.',
-    type: 'website',
+    description:
+      'Official headquarters of THEMEMECADET. A premium creator brand. VEER BHOGYA VASUNDHARA. Established October 2025.',
+    url: 'https://thememecadet.com',
     siteName: 'THEMEMECADET',
+    type: 'website',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1024,
+        height: 1024,
+        alt: 'THEMEMECADET — official logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'THEMEMECADET — Vision to Execution',
     description: 'Official headquarters of THEMEMECADET. VEER BHOGYA VASUNDHARA.',
+    images: ['/logo.png'],
+    creator: '@thememecadet',
   },
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  formatDetection: { telephone: false, email: false, address: false },
+}
+
+export const viewport = {
   themeColor: '#050706',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://thememecadet.com/#org',
+      name: 'THEMEMECADET',
+      alternateName: ['MEMECADET', 'The Meme Cadet'],
+      url: 'https://thememecadet.com',
+      logo: 'https://thememecadet.com/logo.png',
+      foundingDate: '2025-10',
+      slogan: 'Vision to Execution',
+      description:
+        'A premium creator brand built on discipline, creativity and meaningful short-form content. VEER BHOGYA VASUNDHARA.',
+      sameAs: [
+        'https://youtube.com/@thememecadet',
+        'https://instagram.com/thememecadet',
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'thememecadet974@gmail.com',
+        contactType: 'General',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://thememecadet.com/#website',
+      url: 'https://thememecadet.com',
+      name: 'THEMEMECADET',
+      publisher: { '@id': 'https://thememecadet.com/#org' },
+      inLanguage: 'en',
+    },
+  ],
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${mono.variable} dark`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${playfair.variable} ${mono.variable} dark`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preload" as="image" href="/logo.png" fetchPriority="high" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-sans antialiased bg-cadet-ink text-cadet-bone selection:bg-cadet-gold selection:text-cadet-night">
         {children}
       </body>
