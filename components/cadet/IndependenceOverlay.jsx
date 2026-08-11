@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
-import { CadetLogo } from './Logo'
 
 /**
  * Premium Independence Day welcome overlay.
@@ -118,12 +118,37 @@ export default function IndependenceOverlay() {
               transition={{ delay: 0.25, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="mx-auto mb-6 sm:mb-8"
             >
-              <CadetLogo
-                size={104}
-                variant="boxed"
-                priority
-                className="sm:!w-[128px] sm:!h-[128px]"
-              />
+              {/* Army · Air Force · Navy mascots (transparent PNGs) */}
+              <div className="flex justify-center items-end gap-2 sm:gap-6 px-1">
+                {[
+                  { src: '/cadet-army.png',      alt: 'THEMEMECADET Army cadet (green uniform)' },
+                  { src: '/cadet-airforce.png',  alt: 'THEMEMECADET Air Force cadet (blue uniform)' },
+                  { src: '/cadet-navy.png',      alt: 'THEMEMECADET Navy cadet (white uniform)' },
+                ].map((c, i) => (
+                  <motion.div
+                    key={c.src}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                    className="transition-transform duration-300 ease-out hover:-translate-y-1.5"
+                    style={{
+                      filter:
+                        'drop-shadow(0 10px 18px rgba(0,0,0,0.45)) drop-shadow(0 0 10px rgba(201,169,97,0.14))',
+                    }}
+                  >
+                    <Image
+                      src={c.src}
+                      alt={c.alt}
+                      width={520}
+                      height={520}
+                      priority
+                      sizes="(max-width: 640px) 28vw, 220px"
+                      className="w-auto h-[120px] sm:h-[220px] md:h-[240px] lg:h-[260px] max-w-[26vw] sm:max-w-none object-contain select-none pointer-events-none"
+                      draggable={false}
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
             <motion.h2
