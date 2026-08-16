@@ -30,7 +30,7 @@ const signature = Homemade_Apple({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://thememecadet.com'),
+  metadataBase: new URL('https://thememecadet.in'),
   title: {
     default: 'THEMEMECADET — Vision to Execution',
     template: '%s — THEMEMECADET',
@@ -59,7 +59,7 @@ export const metadata = {
     title: 'THEMEMECADET — Vision to Execution',
     description:
       'Official headquarters of THEMEMECADET. A premium creator brand. VEER BHOGYA VASUNDHARA. Established October 2025.',
-    url: 'https://thememecadet.com',
+    url: 'https://thememecadet.in',
     siteName: 'THEMEMECADET',
     type: 'website',
     images: [
@@ -95,10 +95,10 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://thememecadet.com/#org',
+      '@id': 'https://thememecadet.in/#org',
       name: 'THEMEMECADET',
       alternateName: ['MEMECADET', 'The Meme Cadet'],
-      url: 'https://thememecadet.com',
+      url: 'https://thememecadet.in',
       logo: 'https://thememecadet.com/logo-boxed.png',
       foundingDate: '2025-10',
       slogan: 'Vision to Execution',
@@ -116,10 +116,10 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://thememecadet.com/#website',
-      url: 'https://thememecadet.com',
+      '@id': 'https://thememecadet.in/#website',
+      url: 'https://thememecadet.in',
       name: 'THEMEMECADET',
-      publisher: { '@id': 'https://thememecadet.com/#org' },
+      publisher: { '@id': 'https://thememecadet.in/#org' },
       inLanguage: 'en',
     },
   ],
