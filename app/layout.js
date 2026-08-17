@@ -99,7 +99,7 @@ const jsonLd = {
       name: 'THEMEMECADET',
       alternateName: ['MEMECADET', 'The Meme Cadet'],
       url: 'https://thememecadet.in',
-      logo: 'https://thememecadet.com/logo-boxed.png',
+      logo: 'https://thememecadet.in/logo-boxed.png',
       foundingDate: '2025-10',
       slogan: 'Vision to Execution',
       description:
