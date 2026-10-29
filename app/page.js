@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
-  Youtube, Mail, Instagram, ArrowUpRight, ChevronRight,
+  Youtube, Mail, Instagram, Linkedin, ArrowUpRight, ChevronRight,
   Menu, X, Target, Compass, Flame, ShieldCheck,
   Play, ArrowRight, Sparkles, Rocket, Flag, Milestone,
 } from 'lucide-react'
@@ -860,6 +860,9 @@ function Footer() {
               </a>
               <a href="https://instagram.com/thememecadet" target="_blank" rel="noreferrer" className="w-10 h-10 border border-cadet-bone/15 flex items-center justify-center hover:border-cadet-gold hover:text-cadet-gold transition-colors" aria-label="Instagram">
                 <Instagram className="w-4 h-4" />
+              </a>
+              <a href="https://www.linkedin.com/company/the-meme-cadet/" target="_blank" rel="noreferrer" className="w-10 h-10 border border-cadet-bone/15 flex items-center justify-center hover:border-cadet-gold hover:text-cadet-gold transition-colors" aria-label="LinkedIn">
+                <Linkedin className="w-4 h-4" />
               </a>
               <a href="mailto:thememecadet974@gmail.com" className="w-10 h-10 border border-cadet-bone/15 flex items-center justify-center hover:border-cadet-gold hover:text-cadet-gold transition-colors" aria-label="Email">
                 <Mail className="w-4 h-4" />
