@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight, ArrowRight, Flag, Lightbulb, Compass } from 'lucide-react'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { InnerPageFooter, InnerPageNav } from '@/components/cadet/InnerPageChrome'
 
 export const metadata = {
@@ -94,7 +94,7 @@ export default function FounderPage() {
           <div className="lg:col-span-6">
             <p className="text-sm leading-8 text-cadet-bone/65 sm:text-base">I want The Meme Cadet to become more than a page that posts content. The direction is to build a thoughtful defence aspirant community — with relatable storytelling, practical resources and content that helps turn intention into action. There is a lot left to learn and build. That is part of the journey.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="https://www.linkedin.com/company/the-meme-cadet/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-cadet-gold px-5 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-cadet-night transition-colors hover:bg-cadet-bone">The Meme Cadet on LinkedIn <ArrowUpRight className="h-4 w-4" /></a>
+              <a href="https://instagram.com/thememecadet" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-cadet-gold px-5 py-3 text-[11px] font-medium uppercase tracking-[0.16em] text-cadet-night transition-colors hover:bg-cadet-bone">Follow the journey on Instagram <ArrowUpRight className="h-4 w-4" /></a>
               <Link href="/manifesto" className="inline-flex items-center gap-2 border border-cadet-bone/25 px-5 py-3 text-[11px] uppercase tracking-[0.16em] text-cadet-bone transition-colors hover:border-cadet-gold hover:text-cadet-gold">Read the manifesto <ArrowRight className="h-4 w-4" /></Link>
             </div>
           </div>
