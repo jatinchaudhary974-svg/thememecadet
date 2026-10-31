@@ -48,11 +48,13 @@ function Nav() {
   }, [])
 
   const links = [
-    { label: 'Home',    href: '#home' },
-    { label: 'About',   href: '#about' },
-    { label: 'Shorts',  href: '#shorts' },
-    { label: 'Journey', href: '#journey' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home',      href: '#home' },
+    { label: 'About',     href: '#about' },
+    { label: 'Manifesto', href: '/manifesto' },
+    { label: 'Shorts',    href: '#shorts' },
+    { label: 'Journey',   href: '#journey' },
+    { label: 'Founder',   href: '/founder' },
+    { label: 'Contact',   href: '#contact' },
   ]
 
   return (
@@ -832,10 +834,18 @@ function Footer() {
               Navigation
             </div>
             <ul className="space-y-3 text-sm">
-              {['Home','About','Shorts','Journey','Contact'].map((l) => (
-                <li key={l}>
-                  <a href={`#${l.toLowerCase()}`} className="text-cadet-bone/80 hover:text-cadet-gold transition-colors tracking-wide">
-                    {l}
+              {[
+                { label: 'Home', href: '#home' },
+                { label: 'About', href: '#about' },
+                { label: 'Manifesto', href: '/manifesto' },
+                { label: 'Shorts', href: '#shorts' },
+                { label: 'Journey', href: '#journey' },
+                { label: 'Founder', href: '/founder' },
+                { label: 'Contact', href: '#contact' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-cadet-bone/80 hover:text-cadet-gold transition-colors tracking-wide">
+                    {item.label}
                   </a>
                 </li>
               ))}
