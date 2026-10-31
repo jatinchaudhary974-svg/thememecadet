@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { InnerPageFooter, InnerPageNav } from '@/components/cadet/InnerPageChrome'
 
@@ -28,16 +29,33 @@ export default function FounderPage() {
         <div className="pointer-events-none absolute inset-0 radial-fade" />
         <div className="container relative z-10">
           <div className="font-mono text-[10px] uppercase tracking-[0.34em] text-cadet-khaki sm:text-xs">THE PERSON BEHIND THE PROJECT</div>
-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <h1 className="font-display text-[clamp(3.8rem,11vw,9rem)] font-black uppercase leading-[0.82] tracking-tight">Jatin<br /><span className="italic text-cadet-gold">Kumar.</span></h1>
+          <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <h1 className="font-display text-[clamp(3.8rem,11vw,8rem)] font-black uppercase leading-[0.82] tracking-tight">Jatin<br /><span className="italic text-cadet-gold">Kumar.</span></h1>
               <p className="mt-9 max-w-2xl text-base leading-relaxed text-cadet-bone/65 sm:text-xl">Founder, The Meme Cadet. Building an idea into an identity — one lesson, one experiment and one deliberate step at a time.</p>
+              <div className="mt-10 border-l border-cadet-gold/50 py-2 pl-6">
+                <div className="font-mono text-[10px] tracking-[0.22em] text-cadet-khaki">FOUNDED</div>
+                <div className="mt-2 font-display text-3xl text-cadet-bone">October 2025</div>
+                <div className="mt-2 text-xs tracking-[0.12em] text-cadet-khaki">INDEPENDENT CREATOR PROJECT</div>
+              </div>
             </div>
-            <div className="border-l border-cadet-gold/50 py-2 pl-6 lg:col-span-4">
-              <div className="font-mono text-[10px] tracking-[0.22em] text-cadet-khaki">FOUNDED</div>
-              <div className="mt-2 font-display text-3xl text-cadet-bone">October 2025</div>
-              <div className="mt-2 text-xs tracking-[0.12em] text-cadet-khaki">INDEPENDENT CREATOR PROJECT</div>
-            </div>
+            <figure className="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+              <div className="absolute -inset-3 border border-cadet-gold/30" />
+              <div className="relative aspect-[4/5] overflow-hidden bg-cadet-night">
+                <Image
+                  src="/IMG_20251008_170415752.jpg"
+                  alt="Jatin Kumar, founder of The Meme Cadet, seated in a cream shirt"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 40vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="mt-4 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.2em] text-cadet-khaki">
+                <span>THE PERSON BEHIND THE PROJECT</span>
+                <span>01 / 02</span>
+              </figcaption>
+            </figure>
           </div>
           <div className="mt-16 max-w-3xl border-y border-cadet-bone/10 py-8 sm:py-10">
             <p className="font-display text-2xl leading-snug sm:text-4xl">“I didn't start with everything figured out. I started with an idea, a willingness to learn, and the decision to keep building.”</p>
@@ -74,14 +92,27 @@ export default function FounderPage() {
         </div>
       </section>
 
-      <section className="container grid gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
+      <section className="container grid gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-16">
+        <div className="relative mx-auto w-full max-w-sm lg:col-span-5 lg:mx-0">
+          <div className="absolute -inset-3 border border-cadet-gold/25" />
+          <div className="relative aspect-[4/5] overflow-hidden bg-cadet-night">
+            <Image
+              src="/IMG-20251217-WA0002~2.jpg"
+              alt="Jatin Kumar in a black hoodie"
+              fill
+              sizes="(max-width: 1024px) 85vw, 35vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.2em] text-cadet-khaki">A PERSONAL SIDE / 02</p>
+        </div>
+        <div className="lg:col-span-7">
           <div className="font-mono text-[10px] tracking-[0.28em] text-cadet-gold">03 / THE RESPONSIBILITY</div>
           <h2 className="mt-5 font-display text-4xl font-semibold leading-tight sm:text-5xl">A title is easy. The work is the responsibility.</h2>
-        </div>
-        <div className="space-y-6 lg:col-span-7">
-          <p className="text-base leading-8 text-cadet-bone/70">Adding “Founder” to a profile takes a moment. Living up to the responsibility behind it takes time. I don't want the title itself to be the achievement. I want the work, the learning and the value created for the community to give it meaning.</p>
-          <p className="text-sm leading-8 text-cadet-bone/55 sm:text-base">For me, building means staying curious, being honest about what is still unfinished, listening to the people this brand hopes to serve and improving through consistent effort.</p>
+          <div className="mt-6 space-y-6">
+            <p className="text-base leading-8 text-cadet-bone/70">Adding “Founder” to a profile takes a moment. Living up to the responsibility behind it takes time. I don't want the title itself to be the achievement. I want the work, the learning and the value created for the community to give it meaning.</p>
+            <p className="text-sm leading-8 text-cadet-bone/55 sm:text-base">For me, building means staying curious, being honest about what is still unfinished, listening to the people this brand hopes to serve and improving through consistent effort.</p>
+          </div>
         </div>
       </section>
 
