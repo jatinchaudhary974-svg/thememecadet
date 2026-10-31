@@ -4,6 +4,10 @@
 
 @layer base {
   :root {
+    --font-inter: Arial, Helvetica, sans-serif;
+    --font-display: Georgia, 'Times New Roman', serif;
+    --font-mono: 'Courier New', Courier, monospace;
+    --font-signature: cursive;
     /* Dark military theme — used as the only theme */
     --background: 120 12% 4%;          /* near-black w/ faint green */
     --foreground: 40 22% 90%;          /* off white / bone */
