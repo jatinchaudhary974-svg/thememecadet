@@ -1,0 +1,9 @@
+{
+  "name": "cadet-ai-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Isolated serverless API for The Meme Cadet's Cadet AI.",
+  "engines": {
+    "node": ">=20"
+  }
+}
