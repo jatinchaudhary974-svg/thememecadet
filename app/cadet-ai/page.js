@@ -258,6 +258,10 @@ export default function CadetAIDashboard() {
             </div>
 
             <div className="mt-8 border border-[#3C392B] bg-[#0C110D] p-5 sm:p-7">
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <span className="border border-[#927744] bg-[#C9A961]/10 px-2.5 py-1 text-[9px] font-bold tracking-[.18em] text-[#E5D09A]">MOCK MODE READY</span>
+                <span className="text-[10px] text-[#899184]">Simulated demo replies • not a live AI service</span>
+              </div>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="grid h-9 w-9 place-items-center bg-[#C9A961]/15 text-[#D9C184]"><selected.icon size={17} /></div>
@@ -287,6 +291,7 @@ export default function CadetAIDashboard() {
 
               {chatError && <p role="alert" className="mt-4 border border-red-900/70 bg-red-950/30 p-3 text-xs leading-5 text-red-200">{chatError}</p>}
 
+              <p className="mt-3 text-[10px] leading-5 text-[#B99D63]">MOCK MODE: Replies are simulated demonstrations generated from local topic rules and templates, not live AI answers.</p>
               <form onSubmit={sendMessage} className="mt-5 flex flex-col gap-3 border border-[#30372B] bg-[#070A08] p-3 sm:flex-row sm:items-center">
                 <textarea value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={4000} rows={2} aria-label="Chat message" placeholder="Message Cadet AI…" className="min-w-0 flex-1 resize-y bg-transparent px-2 py-2 text-sm text-[#EDEAE0] outline-none placeholder:text-[#5F695C]" />
                 <button type="submit" disabled={sending || !draft.trim()} className="flex items-center justify-center gap-2 bg-[#C9A961] px-5 py-3 text-[10px] font-bold tracking-[.16em] text-[#0B120D] disabled:cursor-not-allowed disabled:opacity-40"><ArrowUpRight size={14} /> {sending ? 'SENDING…' : 'SEND'}</button>
