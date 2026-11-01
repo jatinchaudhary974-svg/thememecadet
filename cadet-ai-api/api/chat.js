@@ -1,4 +1,5 @@
 const DEFAULT_ALLOWED_ORIGINS = ["https://thememecadet.in"];
+const { generateMockResponse } = require("./mock-responses.js");
 
 const MODULE_INSTRUCTIONS = {
   defence: "You are Cadet AI's Defence Assistant. Help with defence careers, NDA, CDS, AFCAT, SSB awareness and preparation. Be accurate, distinguish official facts from general guidance, and advise checking current official notifications for dates, eligibility and rules. Never help with violence, weapons or operational harm.",
@@ -67,7 +68,8 @@ export default async function handler(req, res) {
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
   const openaiKey = process.env.OPENAI_API_KEY;
   const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
-  if (!supabaseUrl || !supabaseAnonKey || !openaiKey) {
+  const mockMode = process.env.CADET_AI_MOCK_MODE === "true";
+  if (!supabaseUrl || !supabaseAnonKey) {
     return res.status(503).json({ error: "Cadet AI chat is not configured yet." });
   }
 
@@ -109,6 +111,15 @@ export default async function handler(req, res) {
     if (content && content.length <= 4000) safeHistory.push({ role: item.role, content });
   }
 
+  if (mockMode) {
+    const answer = generateMockResponse(moduleId, message, safeHistory);
+    return res.status(200).json({ answer, module: moduleId, mode: "mock" });
+  }
+
+  if (!openaiKey) {
+    return res.status(503).json({ error: "Cadet AI chat is not configured yet." });
+  }
+
   try {
     const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -138,7 +149,7 @@ export default async function handler(req, res) {
     const payload = await aiResponse.json();
     const answer = payload.choices?.[0]?.message?.content?.trim();
     if (!answer) return res.status(502).json({ error: "Cadet AI returned an empty response. Please try again." });
-    return res.status(200).json({ answer, module: moduleId });
+    return res.status(200).json({ answer, module: moduleId, mode: "live" });
   } catch {
     return res.status(502).json({ error: "Cadet AI is temporarily unavailable. Please try again." });
   }
