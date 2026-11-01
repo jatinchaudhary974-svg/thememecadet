@@ -11,7 +11,6 @@ import {
 import { CadetLogo } from '@/components/cadet/Logo'
 import BrandLoader from '@/components/cadet/Loader'
 import IndependenceOverlay from '@/components/cadet/IndependenceOverlay'
-import CadetAIFloatingWidget from '@/components/cadet-ai/FloatingWidget'
 
 /* =============================================================
    PRIMITIVES
@@ -1004,7 +1003,6 @@ function App() {
         <Contact />
         <Footer />
       </main>
-      <CadetAIFloatingWidget />
     </>
   )
 }
