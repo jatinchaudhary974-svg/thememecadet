@@ -28,3 +28,17 @@ test("uses recent conversation context for a follow-up", () => {
 test("rejects unknown modules", () => {
   assert.throws(() => generateMockResponse("unknown", "hello"), /valid Cadet AI module/i);
 });
+
+test("explains Newton's laws with the core relationships and examples", () => {
+  const answer = generateMockResponse("study", "Explain Newton's three laws with examples", []);
+  assert.match(answer, /F = ma/);
+  assert.match(answer, /inertia/i);
+  assert.match(answer, /equal-and-opposite/i);
+  assert.match(answer, /MOCK MODE/);
+});
+
+test("defines motion relative to a reference point", () => {
+  const answer = generateMockResponse("study", "What is motion?", []);
+  assert.match(answer, /position with time/i);
+  assert.match(answer, /reference point/i);
+});
