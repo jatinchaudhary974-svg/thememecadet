@@ -50,6 +50,10 @@ export default function CadetAIDashboard() {
   const [activeModule, setActiveModule] = useState('study')
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [signingOut, setSigningOut] = useState(false)
+  const [chatMessages, setChatMessages] = useState([])
+  const [draft, setDraft] = useState('')
+  const [sending, setSending] = useState(false)
+  const [chatError, setChatError] = useState('')
 
   useEffect(() => {
     let alive = true
@@ -95,6 +99,45 @@ export default function CadetAIDashboard() {
     }
   }
 
+  function startNewChat() {
+    setChatMessages([])
+    setDraft('')
+    setChatError('')
+  }
+
+  async function sendMessage(event) {
+    event.preventDefault()
+    const message = draft.trim()
+    if (!message || sending) return
+    setChatError('')
+    setChatMessages((current) => [...current, { role: 'user', content: message }])
+    setDraft('')
+    setSending(true)
+
+    try {
+      const supabase = getSupabaseBrowserClient()
+      const { data, error } = await supabase.auth.getSession()
+      if (error || !data.session?.access_token) throw new Error('Your session expired. Please sign in again.')
+
+      const history = chatMessages.slice(-10).map(({ role, content }) => ({ role, content }))
+      const response = await fetch('https://cadet-ai-api.vercel.app/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${data.session.access_token}`,
+        },
+        body: JSON.stringify({ module: activeModule, message, history }),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.error || 'Cadet AI could not respond. Please try again.')
+      setChatMessages((current) => [...current, { role: 'assistant', content: result.answer }])
+    } catch (error) {
+      setChatError(error.message || 'Something went wrong. Please try again.')
+    } finally {
+      setSending(false)
+    }
+  }
+
   const selected = modules.find((item) => item.id === activeModule) || modules[1]
 
   if (loading || !user) {
@@ -130,7 +173,7 @@ export default function CadetAIDashboard() {
               </div>
               <ChevronDown size={15} className="text-[#858B80]" />
             </div>
-            <button disabled className="mt-3 flex w-full items-center gap-3 border border-[#252D24] px-3 py-3 text-left text-sm text-[#6E776B] opacity-70" title="Conversation history will be enabled with the chat service">
+            <button onClick={startNewChat} className="mt-3 flex w-full items-center gap-3 border border-[#51472F] px-3 py-3 text-left text-sm text-[#D8C18B] hover:bg-[#C9A961]/10">
               <Plus size={16} /> New conversation
             </button>
           </div>
@@ -180,7 +223,7 @@ export default function CadetAIDashboard() {
             </div>
             <div className="flex items-center gap-2 border border-[#343B2D] px-3 py-2">
               <span className="h-1.5 w-1.5 rounded-full bg-[#C9A961]" />
-              <span className="text-[9px] tracking-[.16em] text-[#A8AA9F]">PREVIEW</span>
+              <span className="text-[9px] tracking-[.16em] text-[#A8AA9F]">BETA</span>
             </div>
           </header>
 
@@ -223,14 +266,32 @@ export default function CadetAIDashboard() {
                     <p className="mt-1 text-[9px] tracking-[.17em] text-[#B99D63]">{selected.subtitle}</p>
                   </div>
                 </div>
-                <span className="border border-[#51472F] px-2.5 py-1 text-[9px] tracking-[.15em] text-[#C9B47D]">COMING ONLINE</span>
+                <span className="border border-[#51472F] px-2.5 py-1 text-[9px] tracking-[.15em] text-[#C9B47D]">AI CHAT BETA</span>
               </div>
               <p className="mt-5 max-w-2xl text-sm leading-6 text-[#A2A89B]">{selected.prompt}</p>
-              <div className="mt-5 flex flex-col gap-3 border border-[#30372B] bg-[#070A08] p-3 sm:flex-row sm:items-center">
-                <input disabled aria-label="Chat message" placeholder="AI chat will be enabled in the next build…" className="min-w-0 flex-1 bg-transparent px-2 py-2 text-sm text-[#A2A89B] outline-none placeholder:text-[#5F695C]" />
-                <button disabled className="flex items-center justify-center gap-2 bg-[#625637] px-4 py-3 text-[10px] font-bold tracking-[.16em] text-[#E5D7B4] opacity-50"><ArrowUpRight size={14} /> SEND</button>
+
+              <div aria-live="polite" className="mt-5 max-h-[440px] space-y-4 overflow-y-auto">
+                {chatMessages.length === 0 && (
+                  <div className="border border-[#30372B] bg-[#070A08] p-4 text-xs leading-6 text-[#899184]">
+                    Ask your first question. This beta keeps the current conversation in this browser session only.
+                  </div>
+                )}
+                {chatMessages.map((item, index) => (
+                  <div key={index} className={`max-w-[92%] whitespace-pre-wrap border p-4 text-sm leading-6 ${item.role === 'user' ? 'ml-auto border-[#665633] bg-[#C9A961]/10 text-[#EDE4CC]' : 'mr-auto border-[#30372B] bg-[#070A08] text-[#D8DCD2]'}`}>
+                    <p className="mb-2 text-[9px] font-semibold tracking-[.18em] text-[#B99D63]">{item.role === 'user' ? 'YOU' : 'CADET AI'}</p>
+                    {item.content}
+                  </div>
+                ))}
+                {sending && <p className="text-xs text-[#B99D63]">Cadet AI is thinking…</p>}
               </div>
-              <p className="mt-3 text-[10px] leading-5 text-[#6F786B]">Your account is connected. The chat service, saved conversation history and AI responses will be activated after the secure API integration is complete.</p>
+
+              {chatError && <p role="alert" className="mt-4 border border-red-900/70 bg-red-950/30 p-3 text-xs leading-5 text-red-200">{chatError}</p>}
+
+              <form onSubmit={sendMessage} className="mt-5 flex flex-col gap-3 border border-[#30372B] bg-[#070A08] p-3 sm:flex-row sm:items-center">
+                <textarea value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={4000} rows={2} aria-label="Chat message" placeholder="Message Cadet AI…" className="min-w-0 flex-1 resize-y bg-transparent px-2 py-2 text-sm text-[#EDEAE0] outline-none placeholder:text-[#5F695C]" />
+                <button type="submit" disabled={sending || !draft.trim()} className="flex items-center justify-center gap-2 bg-[#C9A961] px-5 py-3 text-[10px] font-bold tracking-[.16em] text-[#0B120D] disabled:cursor-not-allowed disabled:opacity-40"><ArrowUpRight size={14} /> {sending ? 'SENDING…' : 'SEND'}</button>
+              </form>
+              <p className="mt-3 text-[10px] leading-5 text-[#6F786B]">Beta: chats are not saved to your account yet. Avoid entering sensitive personal information. Temporary rate limits are in place.</p>
             </div>
 
             <footer className="mt-auto pt-12 text-center text-[9px] tracking-[.24em] text-[#60695D]">VEER BHOGYA VASUNDHARA</footer>
