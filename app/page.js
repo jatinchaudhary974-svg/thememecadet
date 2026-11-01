@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } fr
 import {
   Youtube, Mail, Instagram, Linkedin, ArrowUpRight, ChevronRight,
   Menu, X, Target, Compass, Flame, ShieldCheck,
-  Play, ArrowRight, Sparkles, Rocket, Flag, Milestone,
+  Play, ArrowRight, Sparkles, Rocket, Flag, Milestone, LogIn, UserPlus,
 } from 'lucide-react'
 import { CadetLogo } from '@/components/cadet/Logo'
 import BrandLoader from '@/components/cadet/Loader'
@@ -92,6 +92,12 @@ function Nav() {
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
+          <a href="/auth/login" className="inline-flex items-center gap-2 px-3 py-2 text-[11px] tracking-[0.16em] uppercase text-cadet-bone/80 hover:text-cadet-gold transition-colors">
+            <LogIn className="w-4 h-4" /> Sign In
+          </a>
+          <a href="/auth/signup" className="inline-flex items-center gap-2 px-3 py-2 text-[11px] tracking-[0.16em] uppercase border border-cadet-gold/60 text-cadet-gold hover:bg-cadet-gold hover:text-cadet-night transition-colors">
+            <UserPlus className="w-4 h-4" /> Create Account
+          </a>
           <a
             href="https://youtube.com/@thememecadet"
             target="_blank"
@@ -131,6 +137,14 @@ function Nav() {
                   {l.label} <ChevronRight className="w-4 h-4 text-cadet-gold" />
                 </a>
               ))}
+              <div className="grid grid-cols-2 gap-2 pt-4">
+                <a href="/auth/login" onClick={() => setOpen(false)} className="inline-flex items-center justify-center gap-2 border border-cadet-bone/20 px-3 py-3 text-[10px] tracking-[0.14em] uppercase text-cadet-bone">
+                  <LogIn className="w-4 h-4" /> Sign In
+                </a>
+                <a href="/auth/signup" onClick={() => setOpen(false)} className="inline-flex items-center justify-center gap-2 bg-cadet-gold px-3 py-3 text-[10px] tracking-[0.12em] uppercase text-cadet-night">
+                  <UserPlus className="w-4 h-4" /> Join
+                </a>
+              </div>
               <a
                 href="https://youtube.com/@thememecadet"
                 target="_blank"

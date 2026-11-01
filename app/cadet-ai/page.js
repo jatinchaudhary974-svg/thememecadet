@@ -57,6 +57,11 @@ export default function CadetAIDashboard() {
   const [chatMode, setChatMode] = useState(null)
 
   useEffect(() => {
+    const requestedModule = new URLSearchParams(window.location.search).get('module')
+    if (modules.some((item) => item.id === requestedModule)) setActiveModule(requestedModule)
+  }, [])
+
+  useEffect(() => {
     let alive = true
     let subscription
 
