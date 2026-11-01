@@ -99,8 +99,15 @@ export default async function handler(req, res) {
   const body = req.body || {};
   const moduleId = typeof body.module === "string" ? body.module : "";
   const message = typeof body.message === "string" ? body.message.trim() : "";
+  const history = Array.isArray(body.history) ? body.history.slice(-10) : [];
   if (!MODULE_INSTRUCTIONS[moduleId]) return res.status(400).json({ error: "Choose a valid Cadet AI module." });
   if (!message || message.length > 4000) return res.status(400).json({ error: "Message must be between 1 and 4000 characters." });
+  const safeHistory = [];
+  for (const item of history) {
+    if (!item || !["user", "assistant"].includes(item.role) || typeof item.content !== "string") continue;
+    const content = item.content.trim();
+    if (content && content.length <= 4000) safeHistory.push({ role: item.role, content });
+  }
 
   try {
     const aiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -113,6 +120,7 @@ export default async function handler(req, res) {
         model,
         messages: [
           { role: "system", content: MODULE_INSTRUCTIONS[moduleId] },
+          ...safeHistory,
           { role: "user", content: message },
         ],
         max_tokens: 700,
