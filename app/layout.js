@@ -1,4 +1,5 @@
 import './globals.css'
+import FloatingWidget from '@/components/cadet-ai/FloatingWidget'
 
 
 export const metadata = {
@@ -114,6 +115,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="font-sans antialiased bg-cadet-ink text-cadet-bone selection:bg-cadet-gold selection:text-cadet-night">
         {children}
+        <FloatingWidget />
       </body>
     </html>
   )
