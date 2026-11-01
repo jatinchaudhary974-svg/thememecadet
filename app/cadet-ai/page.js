@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import {
   ArrowUpRight, BookOpen, Brain, ChevronDown, Compass, LogOut,
   Menu, MessageSquare, Plus, Shield, Sparkles, Target, X,
@@ -45,6 +45,7 @@ const modules = [
 
 export default function CadetAIDashboard() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [activeModule, setActiveModule] = useState('study')
@@ -55,6 +56,11 @@ export default function CadetAIDashboard() {
   const [sending, setSending] = useState(false)
   const [chatError, setChatError] = useState('')
   const [chatMode, setChatMode] = useState(null)
+
+  useEffect(() => {
+    const requestedModule = searchParams.get('module')
+    if (modules.some((item) => item.id === requestedModule)) setActiveModule(requestedModule)
+  }, [searchParams])
 
   useEffect(() => {
     let alive = true
